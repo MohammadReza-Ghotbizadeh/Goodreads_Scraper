@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Detail</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container text-center">
+        <h2 class="my-4">Book Detail</h2>
+        <div class="custom-card mb-4 custom-text-left">
+            <div class="custom-card-body">
+                <h4>{{ book.title }}</h4>
+                <p><br><img src="{{ book.image_url }}" alt="{{ book.title }}" width="240" height="330"></p>
+                <p><Strong>Reviews</strong>&nbsp;&nbsp;&nbsp;{{ book.reviews_count }}</p>
+                {% if book.language != 'N/A' %}
+                <p><strong>Language</strong>&nbsp;&nbsp;&nbsp;{{ book.language }}</p>
+                {% endif %}
+                {% if book.isbn != 'N/A' %}
+                    <p><strong>ISBN</strong>&nbsp;&nbsp;&nbsp;{{ book.isbn }}</p>
+                {% endif %}
+                {% if book.kindle_price and book.kindle_price != 'N/A' %}
+                    <p><strong>Price</strong>&nbsp;&nbsp;&nbsp;{{ book.kindle_price }}</p>
+                {% endif %}
+                <p><strong>Format</strong>&nbsp;&nbsp;&nbsp;
+                    {% if book.number_of_pages %} {{book.number_of_pages}} pages, {% endif %}
+                    {%if book.book_format != 'N/A' %} {{ book.book_format }} {% endif %}</p>
+                {% if book.awards != 'N/A' %}
+                    <p><strong>Award(s)</strong>&nbsp;&nbsp;&nbsp;{{ book.awards }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <a href="{% url 'book_list' %}" class="btn btn-primary">Back to book list</a><br><br>
+    </div>
+</body>
+</html>

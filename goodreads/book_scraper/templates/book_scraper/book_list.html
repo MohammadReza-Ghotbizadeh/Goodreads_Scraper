@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2 class="my-4">Book List</h2>
+        <div><a href="{% url 'search_books' %}">Back to Scrape</a></div><br>
+        <div class="row">
+            {% for book in page_obj %}
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="{{ book.image_url }}" alt="{{ book.title }}" class="card-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{% url 'book_detail' book.id %}">{{ book.shortened_title }}</a></h5>
+                                    <h6 class="card-title">Keyword: {{ book.keyword }}</h6>
+                                    <div class="book-details">
+                                        <p class="card-text">by {{ book.authors }}</p>
+                                        {% if book.avg_rating %}
+                                        <p class="card-text">{{ book.avg_rating }} avg Rating</p>
+                                        {% endif %}
+                                        {% if book.num_ratings %}
+                                        <p class="card-text">{{ book.num_ratings }} ratings</p>
+                                        {% endif %}
+                                        {% if book.published_year %}
+                                        <p class="card-text">published {{ book.published_year }}</p>
+                                        {% endif %}
+                                        {% if book.editions %}
+                                        <p class="card-text">{{ book.editions }} editions</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:2 %}
+                    </div><div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="pagination justify-content-center">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" class="btn btn-outline-secondary">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-secondary">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-secondary">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-secondary">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</body>
+</html>

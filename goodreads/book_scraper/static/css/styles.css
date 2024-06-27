@@ -1,0 +1,54 @@
+/* Add your custom styles here */
+body {
+    background-color: #f8f9fa; /* Light gray background color */
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 545px; /* Set the width of the card */
+    height: 310px; /* Set the height of the card  */
+    margin-bottom: 10px; /* Add some spacing between cards */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange card elements vertically */
+}
+
+.card-img {
+    width: 200px; /* Set the width of the image */
+    height: 308px; /* Set the height of the image  */
+    object-fit: cover; /* Maintain aspect ratio */
+    border-top-left-radius: 8px; /* Ensure border-radius applies to image */
+    border-bottom-left-radius: 8px; /* Ensure border-radius applies to image */
+}
+
+.card-body {
+    padding-left: 35px; /* Add padding to the card body */
+    padding-top: 5px;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange card elements vertically */
+    justify-content: space-between; /* Align card elements */
+}
+
+.card-title a {
+    color: blue; /* Set the color to blue */
+    text-decoration: underline; /* Add underline */
+}
+
+.card-title a:hover {
+    color: darkblue; /* Change color on hover */
+}
+
+.book-details {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.book-details p {
+    margin: 5px 0; /* Add margin to each paragraph */
+}
+
+.pagination {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
